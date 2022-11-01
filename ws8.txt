@@ -1,0 +1,104 @@
+Script started on 2022-10-31 22:31:18-04:00
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ history -c
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ history 
+   24  history 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ awk -F'\t'  '{ if ($12 == "Y") print $0}' amazon_reviews_us_Books_v1_02.tsv > verified.txt
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ awk -F'\t'  '{ if ($12 == "N") print $0}' amazon_reviews_us_Books_v1_02.tsv > unverified.txt
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cut -f 14 verified.txt | tr ",.;'?\":!" ' ' > verif.1
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cut -f 14 unverified.txt | tr ",.;'?\":!" ' ' > unverif.1
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat verif.1 | tr [:upper:] [:lower:] > verif.2
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat unverif.1 | tr [:upper:] [:lower:] > unverif.2
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat verif.2 | sed -e 's/ and / /g' -e 's/ or / /g' -e 's/ if / /g' -e 's/ in / /g' -e 's/ it / /g' > verif.3
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat unverif.2 | sed -e 's/ and / /g' -e 's/ or / /g' -e 's/ if / /g' -e 's/ in / /g' -e 's/ it / /g' > unveri
+^C
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat unverif.2 | sed -e 's/ and / /g' -e 's/ or / /g' -e 's/ if / /g' -e 's/ in / /g' -e 's/ it / /g' > unverif.3
+
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat verif.3 |  sed -e 's/ the / /g' -e 's/ to / /g' -e 's/ for / /g' -e 's/ that / /g' -e 's/ this / /g' -e 's/ a / /g' -e 's/ is / /g' -e 's/ of / /g'  -e 's/ are / /g' > verif.4
+
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat unverif.3 |  sed -e 's/ the / /g' -e 's/ to / /g' -e 's/ for / /g' -e 's/ that / /g' -e 's/ this / /g' -e 's/ a / /g' -e 's/ is / /g' -e 's/ of / /gg' -e 's/ are / /g' > unverif.4
+
+
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat verif.4 | sed -e 's/ [a-zA-Z] / /g' > verif.5
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat unverif.4 | sed -e 's/ [a-zA-Z] / /g' > unverif.5
+
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat verif.5 | tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr | head  -14
+
+ 506046 book
+ 463532 br
+ 289467 you
+ 286570 with
+ 284602 as
+ 246719 on
+ 221126 but
+ 220071 was
+ 219146 not
+ 204832 have
+ 190399 quot
+ 188067 be
+ 175435 his
+ 163875 he
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ cat unverif.5 | tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr | head  -14
+
+
+5840768 book
+4484398 br
+3253409 you
+3251186 with
+3144236 as
+2724871 was
+2591782 on
+2458308 quot
+2423030 but
+2323296 not
+2226026 have
+2137374 his
+2066017 be
+1995352 he
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ history > cmds.log
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ 
+]0;rishabh@sjsu:~/ws8[rishabh@sjsu ws8]$ exit
+
+Script done on 2022-10-31 23:09:11-04:00

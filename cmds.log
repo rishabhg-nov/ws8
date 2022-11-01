@@ -1,0 +1,17 @@
+   24  history 
+   25  awk -F'\t'  '{ if ($12 == "Y") print $0}' amazon_reviews_us_Books_v1_02.tsv > verified.txt
+   26  awk -F'\t'  '{ if ($12 == "N") print $0}' amazon_reviews_us_Books_v1_02.tsv > unverified.txt
+   27  cut -f 14 verified.txt | tr ",.;'?\":!" ' ' > verif.1
+   28  cut -f 14 unverified.txt | tr ",.;'?\":!" ' ' > unverif.1
+   29  cat verif.1 | tr [:upper:] [:lower:] > verif.2
+   30  cat unverif.1 | tr [:upper:] [:lower:] > unverif.2
+   31  cat verif.2 | sed -e 's/ and / /g' -e 's/ or / /g' -e 's/ if / /g' -e 's/ in / /g' -e 's/ it / /g' > verif.3
+   32  cat unverif.2 | sed -e 's/ and / /g' -e 's/ or / /g' -e 's/ if / /g' -e 's/ in / /g' -e 's/ it / /g' > unveri
+   33  cat unverif.2 | sed -e 's/ and / /g' -e 's/ or / /g' -e 's/ if / /g' -e 's/ in / /g' -e 's/ it / /g' > unverif.3
+   34  cat verif.3 |  sed -e 's/ the / /g' -e 's/ to / /g' -e 's/ for / /g' -e 's/ that / /g' -e 's/ this / /g' -e 's/ a / /g' -e 's/ is / /g' -e 's/ of / /g' -e 's/ are / /g' > verif.4
+   35  cat unverif.3 |  sed -e 's/ the / /g' -e 's/ to / /g' -e 's/ for / /g' -e 's/ that / /g' -e 's/ this / /g' -e 's/ a / /g' -e 's/ is / /g' -e 's/ of / /g' -e 's/ are / /g' > unverif.4
+   36  cat verif.4 | sed -e 's/ [a-zA-Z] / /g' > verif.5
+   37  cat unverif.4 | sed -e 's/ [a-zA-Z] / /g' > unverif.5
+   38  cat verif.5 | tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr | head  -14
+   39  cat unverif.5 | tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr | head  -14
+   40  history > cmds.log
